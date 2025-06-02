@@ -42,7 +42,9 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
-
+app.get("/",async(req,res)=>{
+  return res.status(200).json("Hello rithesh")
+})
 // Auth Routes
 app.post('/register', async (req, res) => {
   try {
