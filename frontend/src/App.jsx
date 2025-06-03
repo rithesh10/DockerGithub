@@ -286,7 +286,7 @@ function App() {
         // Product Table Page
         <Container maxWidth="lg" sx={{ mt: 4 }}>
           <Typography variant="h4" gutterBottom>
-            Product List
+            Rithesh List
           </Typography>
 
           {message && (
