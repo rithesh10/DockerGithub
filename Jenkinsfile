@@ -8,11 +8,12 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                git 'https://github.com/rithesh10/DockerGithub.git'
-            }
-        }
+       stage('Checkout Code') {
+  steps {
+    git branch: 'main', url: 'https://github.com/rithesh10/DockerGithub.git'
+  }
+}
+
 
         stage('Build Backend Image') {
             steps {
