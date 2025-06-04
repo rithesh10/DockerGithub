@@ -31,13 +31,14 @@ pipeline {
         }
 
         stage('Push Images to Docker Hub') {
-            steps {
-                bat """
-                    echo %DOCKER_CREDENTIALS_PSW% | docker login -u %DOCKER_CREDENTIALS_USR% --password-stdin
-                    docker push %BACKEND_IMAGE%
-                    docker push %FRONTEND_IMAGE%
-                """
-            }
-        }
+    steps {
+        bat """
+            docker login -u %DOCKER_CREDENTIALS_USR% -p %DOCKER_CREDENTIALS_PSW%
+            docker push %BACKEND_IMAGE%
+            docker push %FRONTEND_IMAGE%
+        """
+    }
+}
+
     }
 }
