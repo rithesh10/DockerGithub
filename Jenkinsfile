@@ -8,17 +8,16 @@ pipeline {
     }
 
     stages {
-       stage('Checkout Code') {
-  steps {
-    git branch: 'main', url: 'https://github.com/rithesh10/DockerGithub.git'
-  }
-}
-
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/rithesh10/DockerGithub.git'
+            }
+        }
 
         stage('Build Backend Image') {
             steps {
                 dir('backend') {
-                    sh 'docker build -t $BACKEND_IMAGE .'
+                    bat 'docker build -t %BACKEND_IMAGE% .'
                 }
             }
         }
@@ -26,18 +25,18 @@ pipeline {
         stage('Build Frontend Image') {
             steps {
                 dir('frontend') {
-                    sh 'docker build -t $FRONTEND_IMAGE .'
+                    bat 'docker build -t %FRONTEND_IMAGE% .'
                 }
             }
         }
 
         stage('Push Images to Docker Hub') {
             steps {
-                sh '''
-                    echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin
-                    docker push $BACKEND_IMAGE
-                    docker push $FRONTEND_IMAGE
-                '''
+                bat """
+                    echo %DOCKER_CREDENTIALS_PSW% | docker login -u %DOCKER_CREDENTIALS_USR% --password-stdin
+                    docker push %BACKEND_IMAGE%
+                    docker push %FRONTEND_IMAGE%
+                """
             }
         }
     }
